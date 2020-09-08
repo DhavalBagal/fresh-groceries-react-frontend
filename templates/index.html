@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html style="font-size: 16px;"> 
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <script src="../static/scripts/jquery.min.js"></script>
+        <script  src="../static/scripts/react.development.js"></script>
+        <script  src="../static/scripts/react-dom.development.js"></script> 
+        <script type="text/javascript">
+            var allResponsiveStyles = [], viewportWidth;
+            var allResponsiveStylesCount=0;
+
+            function addResponsiveStyle(selectorString, styleDict){
+                allResponsiveStyles.push({selector:selectorString, style:styleDict});
+                allResponsiveStylesCount = allResponsiveStylesCount+1;
+            }
+
+
+            function applyResponsiveStyle(){
+                viewportWidth = $(window).width();
+
+                /* sm:1, md:2, lg:3, xl:4*/ 
+                switch(true){
+                    case viewportWidth>=200 && viewportWidth<600:   for(var i=0; i<allResponsiveStylesCount; i++){ $(allResponsiveStyles[i].selector).css(allResponsiveStyles[i].style[0]); } break;
+                    case viewportWidth>=600 && viewportWidth<768:   for(var i=0; i<allResponsiveStylesCount; i++){ $(allResponsiveStyles[i].selector).css(allResponsiveStyles[i].style[1]); } break;
+                    case viewportWidth>=768 && viewportWidth<992:   for(var i=0; i<allResponsiveStylesCount; i++){ $(allResponsiveStyles[i].selector).css(allResponsiveStyles[i].style[2]); } break;
+                    case viewportWidth>=992:                        for(var i=0; i<allResponsiveStylesCount; i++){ $(allResponsiveStyles[i].selector).css(allResponsiveStyles[i].style[3]); } break;
+                }
+            }
+        </script>
+
+        <style>
+            @font-face {font-family: Poppins-Black; src: url(../static/fonts/Poppins-Black.ttf);}
+            @font-face {font-family: Poppins-Black-Italic; src: url(../static/fonts/Poppins-Black-Italic.ttf);}
+            @font-face {font-family: Poppins-Bold; src: url(../static/fonts/Poppins-Bold.ttf);}
+            @font-face {font-family: Poppins-Bold-Italic; src: url(../static/fonts/Poppins-Bold-Italic.ttf);}
+            @font-face {font-family: Poppins-Extra-Bold; src: url(../static/fonts/Poppins-Extra-Bold.ttf);}
+            @font-face {font-family: Poppins-Extra-Bold-Italic; src: url(../static/fonts/Poppins-Extra-Bold-Italic.ttf);}
+            @font-face {font-family: Poppins-Extra-Light; src: url(../static/fonts/Poppins-Extra-Light.ttf);}
+            @font-face {font-family: Poppins-Extra-Light-Italic; src: url(../static/fonts/Poppins-Extra-Light-Italic.ttf);}
+            @font-face {font-family: Poppins-Italic; src: url(../static/fonts/Poppins-Italic.ttf);}
+            @font-face {font-family: Poppins-Light; src: url(../static/fonts/Poppins-Light.ttf);}
+            @font-face {font-family: Poppins-Light-Italic; src: url(../static/fonts/Poppins-Light-Italic.ttf);}
+            @font-face {font-family: Poppins-Medium; src: url(../static/fonts/Poppins-Medium.ttf);}
+            @font-face {font-family: Poppins-Medium-Italic; src: url(../static/fonts/Poppins-Medium-Italic.ttf);}
+            @font-face {font-family: Poppins-Regular; src: url(../static/fonts/Poppins-Regular.ttf);}
+            @font-face {font-family: Poppins-Semi-Bold; src: url(../static/fonts/Poppins-Semi-Bold.ttf);}
+            @font-face {font-family: Poppins-Semi-Bold-Italic; src: url(../static/fonts/Poppins-Semi-Bold-Italic.ttf);}
+            @font-face {font-family: Poppins-Thin; src: url(../static/fonts/Poppins-Thin.ttf);}
+            @font-face {font-family: Poppins-Thin-Italic; src: url(../static/fonts/Poppins-Thin-Italic.ttf);}
+        </style>
+         
+        <script  src="../static/components/Header.js"></script>
+        <script  src="../static/components/Section1.js"></script>
+        <script  src="../static/components/Section2.js"></script>
+        <script  src="../static/components/Section3.js"></script>
+        <script  src="../static/components/Section4.js"></script>
+        <script  src="../static/components/Section5.js"></script>
+        <script  src="../static/components/Section6.js"></script> 
+        <script  src="../static/components/AboutUs.js"></script>
+        <script  src="../static/components/Footer.js"></script> 
+        
+    </head>
+
+    <body style="margin:0; height: fit-content;">
+        <div id="root"></div>
+
+        <script>
+            var lines, filepath;
+            
+
+            class App extends React.Component{
+                
+                constructor(props){
+                    super(props);
+                    this.style = {
+                        appStyle: {
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContents: "flex-start",
+                            alignItems: "center",
+                            width: "100vw",
+                            height: "100vh"
+                        }
+                    }
+                }
+                
+                componentDidMount(){
+                    applyResponsiveStyle();
+
+                    $(document).on("click",".login-signup-btns", function(){location.reload(true)});
+                    $(document).on("click","#small-nav-icon", function(){location.reload(true)});
+                }
+
+                render(){ 
+                    
+                    return(
+                        React.createElement("div", {id:"app", style:this.style.appStyle},
+                            React.createElement(Header, null, null),
+                            React.createElement(Section1, null, null),
+                            React.createElement(Section2, null, null),
+                            React.createElement(Section3, null, null),
+                            React.createElement(Section4, null, null),
+                            React.createElement(Section5, null, null),
+                            React.createElement(Section6, null, null),
+                            React.createElement(AboutUs, null, null),
+                            React.createElement(Footer, null, null),
+                            React.createElement("br", null, null),
+                            React.createElement("br", null, null)
+                        )
+                        
+                    );
+                }
+            }
+            
+
+            ReactDOM.render(React.createElement(App, null, null), document.getElementById("root"))
+
+            $(window).on('resize', function(){
+                applyResponsiveStyle();
+                viewportWidth = $(window).width();
+                if (viewportWidth>=200 && viewportWidth<600){
+                    var text = "Stay Home\nWe'll Deliver"
+                    $("#stay-home-text").text(text)
+                }
+                else $("#stay-home-text").text("Stay Home - We'll Deliver")
+            });
+            
+            $(document).ready(function(){
+                
+                
+            });
+        </script>
+    </body>
+</html>
+
+<!-- 
+    
+ -->
